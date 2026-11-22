@@ -1,0 +1,1761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Garuda Construction — Lead Desk & Admin</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-subtle: #f8fafc;
+      --bg-hover: #f1f5f9;
+      --border: #e2e8f0;
+      --border-focus: #0f172a;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --primary: #0f172a;
+      --primary-hover: #1e293b;
+      --accent-gold: #c28830;
+      --accent-green: #059669;
+      --accent-green-bg: #ecfdf5;
+      --accent-blue: #2563eb;
+      --accent-blue-bg: #eff6ff;
+      --accent-amber: #d97706;
+      --accent-amber-bg: #fffbeb;
+      --accent-purple: #7c3aed;
+      --accent-purple-bg: #f5f3ff;
+      --accent-red: #dc2626;
+      --accent-red-bg: #fef2f2;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --radius: 8px;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* --- Top Navigation Header --- */
+    .admin-nav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 28px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .admin-nav__brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .admin-nav__logo-img {
+      height: 32px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .admin-nav__badge {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    .admin-nav__status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-left: 12px;
+      padding-left: 12px;
+      border-left: 1px solid var(--border);
+    }
+
+    .admin-nav__status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+    }
+
+    .admin-nav__actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* --- Buttons --- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: var(--radius);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-decoration: none;
+      line-height: 1;
+    }
+
+    .btn--primary {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+    .btn--primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn--secondary {
+      background: #ffffff;
+      color: var(--text);
+      border-color: var(--border);
+    }
+    .btn--secondary:hover {
+      background: var(--bg-hover);
+      border-color: #cbd5e1;
+    }
+
+    .btn--sm {
+      padding: 6px 10px;
+      font-size: 12px;
+      border-radius: 6px;
+    }
+
+    .btn--success {
+      background: #10b981;
+      color: white;
+      border-color: #10b981;
+    }
+    .btn--success:hover {
+      background: #059669;
+    }
+
+    .btn--danger {
+      background: #ffffff;
+      color: var(--accent-red);
+      border-color: #fecaca;
+    }
+    .btn--danger:hover {
+      background: var(--accent-red-bg);
+    }
+
+    /* --- Main Container --- */
+    .admin-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 28px;
+    }
+
+    /* --- Header Titles --- */
+    .admin-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .admin-header__title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .admin-header__sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* --- Stat Metric Cards --- */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      transition: border-color 0.15s ease;
+    }
+    .stat-card:hover {
+      border-color: #cbd5e1;
+    }
+
+    .stat-card__label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .stat-card__value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.03em;
+      margin-top: 8px;
+    }
+
+    .stat-card__desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* --- Filter & Toolbar Row --- */
+    .toolbar {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .toolbar__left {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1;
+      max-width: 380px;
+    }
+
+    .search-box input {
+      width: 100%;
+      height: 36px;
+      padding: 0 12px 0 34px;
+      font-family: inherit;
+      font-size: 13px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      outline: none;
+      background: var(--bg-subtle);
+      transition: all 0.15s ease;
+    }
+    .search-box input:focus {
+      background: #ffffff;
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.06);
+    }
+
+    .search-box svg {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-light);
+      pointer-events: none;
+    }
+
+    .select-filter {
+      height: 36px;
+      padding: 0 28px 0 10px;
+      font-family: inherit;
+      font-size: 13px;
+      color: var(--text);
+      background: var(--bg-subtle) url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") no-repeat right 8px center/14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      outline: none;
+      appearance: none;
+      cursor: pointer;
+    }
+    .select-filter:focus {
+      border-color: var(--border-focus);
+      background-color: #ffffff;
+    }
+
+    .status-tabs {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+
+    .status-tab {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+    .status-tab:hover {
+      background: var(--bg-hover);
+      color: var(--text);
+    }
+    .status-tab.active {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    /* --- Leads Table Card --- */
+    .table-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .leads-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    .leads-table th {
+      background: var(--bg-subtle);
+      padding: 12px 16px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .leads-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+      color: var(--text);
+    }
+
+    .leads-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .leads-table tr:hover td {
+      background: #fafafa;
+    }
+
+    /* --- Lead Attributes --- */
+    .lead-name {
+      font-weight: 600;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .lead-contact {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 3px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .lead-action-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 500;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      background: #ffffff;
+      transition: all 0.15s ease;
+    }
+    .lead-action-pill:hover {
+      border-color: #cbd5e1;
+      color: var(--text);
+      background: var(--bg-hover);
+    }
+    .lead-action-pill--wa {
+      color: #059669;
+      border-color: #a7f3d0;
+      background: #ecfdf5;
+    }
+    .lead-action-pill--wa:hover {
+      background: #d1fae5;
+      border-color: #6ee7b7;
+    }
+
+    /* Status Pills */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .badge--new {
+      background: var(--accent-blue-bg);
+      color: var(--accent-blue);
+      border: 1px solid #bfdbfe;
+    }
+    .badge--contacted {
+      background: var(--accent-amber-bg);
+      color: var(--accent-amber);
+      border: 1px solid #fde68a;
+    }
+    .badge--in_discussion {
+      background: var(--accent-purple-bg);
+      color: var(--accent-purple);
+      border: 1px solid #ddd6fe;
+    }
+    .badge--site_visit {
+      background: #e0f2fe;
+      color: #0284c7;
+      border: 1px solid #bae6fd;
+    }
+    .badge--converted {
+      background: var(--accent-green-bg);
+      color: var(--accent-green);
+      border: 1px solid #a7f3d0;
+    }
+    .badge--lost {
+      background: var(--accent-red-bg);
+      color: var(--accent-red);
+      border: 1px solid #fecaca;
+    }
+
+    .status-select-inline {
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 6px;
+      padding: 4px 6px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .lead-tag {
+      display: inline-block;
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    .lead-time {
+      font-size: 11px;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    /* --- Empty State --- */
+    .empty-state {
+      padding: 64px 24px;
+      text-align: center;
+      color: var(--text-muted);
+    }
+    .empty-state svg {
+      color: var(--text-light);
+      margin-bottom: 12px;
+    }
+    .empty-state h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    /* --- Modal & Drawer Backdrops --- */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.4);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    .modal-backdrop.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      border-radius: 12px;
+      max-width: 580px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-lg);
+      transform: scale(0.97);
+      transition: transform 0.2s ease;
+      overflow: hidden;
+    }
+    .modal-backdrop.is-open .modal-card {
+      transform: scale(1);
+    }
+
+    .modal-head {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .modal-head__title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .modal-close-btn {
+      background: transparent;
+      border: none;
+      font-size: 20px;
+      color: var(--text-muted);
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px;
+    }
+    .modal-close-btn:hover {
+      color: var(--text);
+    }
+
+    .modal-body {
+      padding: 24px;
+      overflow-y: auto;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .form-input, .form-textarea, .form-select {
+      width: 100%;
+      padding: 9px 12px;
+      font-family: inherit;
+      font-size: 13px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      outline: none;
+      background: #ffffff;
+      transition: all 0.15s ease;
+    }
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.08);
+    }
+    .form-textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border);
+      background: var(--bg-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    /* --- Lead Detail Drawer --- */
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      max-width: 520px;
+      background: #ffffff;
+      box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+      z-index: 110;
+      transform: translateX(100%);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+    }
+    .drawer.is-open {
+      transform: translateX(0);
+    }
+
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.25);
+      z-index: 105;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    .drawer-backdrop.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .drawer-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .drawer-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+    }
+
+    .detail-section {
+      margin-bottom: 24px;
+    }
+    .detail-section__title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .detail-box {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      font-size: 13px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .detail-row:last-child {
+      border-bottom: none;
+    }
+    .detail-row__label {
+      color: var(--text-muted);
+    }
+    .detail-row__value {
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    /* Notes timeline */
+    .note-item {
+      padding: 10px 12px;
+      border-radius: var(--radius);
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+    .note-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      margin-top: 4px;
+    }
+
+    /* --- Auth Screen Overlay --- */
+    .auth-overlay {
+      position: fixed;
+      inset: 0;
+      background: #ffffff;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 400px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 36px 32px;
+      box-shadow: var(--shadow-md);
+      background: #ffffff;
+      text-align: center;
+    }
+
+    .auth-logo {
+      height: 44px;
+      width: auto;
+      margin-bottom: 16px;
+    }
+
+    .auth-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .auth-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      margin-bottom: 24px;
+    }
+
+    .auth-form {
+      text-align: left;
+    }
+
+    .auth-error {
+      background: var(--accent-red-bg);
+      border: 1px solid #fecaca;
+      color: var(--accent-red);
+      font-size: 12px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      display: none;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #0f172a;
+      color: #ffffff;
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      box-shadow: var(--shadow-lg);
+      z-index: 300;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .toast.is-visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .form-input { font-size: 16px; min-height: 44px; }
+      .admin-nav {
+        padding: 10px 14px;
+        height: auto;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .admin-nav__actions {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .admin-nav__actions .btn {
+        padding: 5px 8px;
+        font-size: 11px;
+      }
+      .admin-nav__badge {
+        font-size: 10px;
+        padding: 2px 6px;
+      }
+      .admin-container {
+        padding: 14px;
+      }
+      .table-card {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .admin-nav__status {
+        display: none;
+      }
+      .leads-table th:nth-child(4),
+      .leads-table td:nth-child(4),
+      .leads-table th:nth-child(5),
+      .leads-table td:nth-child(5) {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== AUTHENTICATION OVERLAY ==================== -->
+  <div class="auth-overlay" id="auth-overlay">
+    <div class="auth-card">
+      <img class="auth-logo" src="assets/logo.png" alt="Garuda Construction">
+      <h1 class="auth-title">Lead Acquisition Desk</h1>
+      <p class="auth-sub">Enter administrative credentials to manage client enquiries.</p>
+
+      <div class="auth-error" id="auth-error">Invalid username or password. Please try again.</div>
+
+      <form class="auth-form" id="login-form">
+        <div class="form-group">
+          <label class="form-label" for="login-username">Admin Username</label>
+          <input class="form-input" type="text" id="login-username" name="username" placeholder="Enter username" required autofocus autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="login-password">Password</label>
+          <input class="form-input" type="password" id="login-password" name="password" placeholder="••••••••••••" required autocomplete="current-password">
+        </div>
+        <button class="btn btn--primary" type="submit" style="width: 100%; height: 40px; margin-top: 8px;">
+          <span>Sign In to Lead Desk</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== TOP NAVIGATION ==================== -->
+  <header class="admin-nav">
+    <div style="display: flex; align-items: center;">
+      <a class="admin-nav__brand" href="/admin">
+        <img class="admin-nav__logo-img" src="assets/logo.png" alt="Garuda Construction">
+      </a>
+      <span class="admin-nav__badge">Admin Lead Desk</span>
+      <div class="admin-nav__status">
+        <span class="admin-nav__status-dot" id="db-indicator"></span>
+        <span id="db-status-text">Connecting MongoDB...</span>
+      </div>
+    </div>
+
+    <div class="admin-nav__actions">
+      <a class="btn btn--secondary btn--sm" href="/" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        <span>View Live Site</span>
+      </a>
+
+      <button class="btn btn--secondary btn--sm" id="btn-export-csv" title="Export all leads to CSV spreadsheet">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>Export CSV</span>
+      </button>
+
+      <button class="btn btn--primary btn--sm" id="btn-open-add-lead">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        <span>+ Add Lead</span>
+      </button>
+
+      <button class="btn btn--secondary btn--sm" id="btn-logout" title="Sign out">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        <span>Logout</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN DASHBOARD ==================== -->
+  <main class="admin-container">
+    <div class="admin-header">
+      <div>
+        <h1 class="admin-header__title">Lead Inquiries &amp; Quotations</h1>
+        <p class="admin-header__sub">Acquire, manage, and follow up with potential villa, commercial, and renovation clients.</p>
+      </div>
+      <div>
+        <button class="btn btn--secondary btn--sm" id="btn-refresh">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          <span>Refresh</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- METRICS CARDS -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-card__label">Total Inquiries</div>
+        <div class="stat-card__value" id="stat-total">0</div>
+        <div class="stat-card__desc">All-time acquired leads</div>
+      </div>
+
+      <div class="stat-card" style="border-left: 3px solid var(--accent-blue);">
+        <div class="stat-card__label" style="color: var(--accent-blue);">New / Uncontacted</div>
+        <div class="stat-card__value" id="stat-new" style="color: var(--accent-blue);">0</div>
+        <div class="stat-card__desc">Awaiting first call/reply</div>
+      </div>
+
+      <div class="stat-card" style="border-left: 3px solid var(--accent-purple);">
+        <div class="stat-card__label">In Discussion / Site Visits</div>
+        <div class="stat-card__value" id="stat-active">0</div>
+        <div class="stat-card__desc">Architectural &amp; soil test stage</div>
+      </div>
+
+      <div class="stat-card" style="border-left: 3px solid var(--accent-green);">
+        <div class="stat-card__label" style="color: var(--accent-green);">Converted Projects</div>
+        <div class="stat-card__value" id="stat-converted" style="color: var(--accent-green);">0</div>
+        <div class="stat-card__desc">Agreements signed</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-card__label">Est. Pipeline Value</div>
+        <div class="stat-card__value" id="stat-pipeline" style="font-size: 22px;">₹0</div>
+        <div class="stat-card__desc">From calculator estimates</div>
+      </div>
+    </div>
+
+    <!-- TOOLBAR & FILTERS -->
+    <div class="toolbar">
+      <div class="toolbar__left">
+        <!-- Search Input -->
+        <div class="search-box">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="filter-search" placeholder="Search by name, phone, location...">
+        </div>
+
+        <!-- Service Filter -->
+        <select class="select-filter" id="filter-service">
+          <option value="all">All Services</option>
+          <option value="Residential">Residential House Construction</option>
+          <option value="Commercial">Commercial Construction</option>
+          <option value="Interior">Interior Design</option>
+          <option value="Renovation">Renovation &amp; Remodeling</option>
+          <option value="Architectural">Architectural Planning</option>
+          <option value="Calculator">Cost Calculator Estimate</option>
+        </select>
+      </div>
+
+      <!-- Status Tabs -->
+      <div class="status-tabs" id="status-tabs">
+        <button class="status-tab active" data-status="all">All</button>
+        <button class="status-tab" data-status="new">New</button>
+        <button class="status-tab" data-status="contacted">Contacted</button>
+        <button class="status-tab" data-status="in_discussion">In Discussion</button>
+        <button class="status-tab" data-status="site_visit">Site Visit</button>
+        <button class="status-tab" data-status="converted">Converted</button>
+        <button class="status-tab" data-status="lost">Lost</button>
+      </div>
+    </div>
+
+    <!-- LEADS TABLE -->
+    <div class="table-card">
+      <table class="leads-table">
+        <thead>
+          <tr>
+            <th>Customer</th>
+            <th>Requirement &amp; Service</th>
+            <th>Location / Sqft</th>
+            <th>Lead Stage</th>
+            <th>Source &amp; Date</th>
+            <th style="text-align: right;">Action</th>
+          </tr>
+        </thead>
+        <tbody id="leads-tbody">
+          <!-- Populated dynamically -->
+        </tbody>
+      </table>
+
+      <!-- Empty state when no leads -->
+      <div class="empty-state" id="empty-state" style="display: none;">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <h3>No Leads Found</h3>
+        <p>No customer enquiries match your current search or filter criteria.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==================== LEAD DETAILS DRAWER ==================== -->
+  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+  <aside class="drawer" id="lead-drawer">
+    <div class="drawer-header">
+      <div>
+        <h2 style="font-size: 18px; font-weight: 700;" id="drawer-name">Client Name</h2>
+        <p style="font-size: 12px; color: var(--text-muted); margin-top: 2px;" id="drawer-source">Source: Website Form</p>
+      </div>
+      <button class="modal-close-btn" id="drawer-close">&times;</button>
+    </div>
+
+    <div class="drawer-content">
+      <!-- Quick Contact Actions -->
+      <div style="display: flex; gap: 8px; margin-bottom: 20px;">
+        <a class="btn btn--success btn--sm" id="drawer-wa-btn" href="javascript:void(0)" target="_blank" rel="noopener" style="flex: 1;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 2C6.5 2 2 6.5 2 12.031c0 1.938.547 3.75 1.5 5.312L2 22l4.812-1.453c1.5 1.047 3.328 1.609 5.219 1.609 5.531 0 10.031-4.5 10.031-10.031S17.562 2 12.031 2zm0 18.281c-1.672 0-3.234-.453-4.594-1.297l-.328-.203-3.063.922.938-3.016-.219-.344a8.16 8.16 0 0 1-1.312-4.312c0-4.547 3.688-8.25 8.25-8.25s8.25 3.703 8.25 8.25-3.703 8.25-8.25 8.25zm4.516-6.172c-.25-.125-1.469-.719-1.688-.812-.234-.078-.406-.125-.578.125-.172.25-.672.812-.828.984-.156.172-.312.188-.562.062-.25-.125-1.047-.391-2-1.234-.734-.656-1.234-1.469-1.375-1.719-.156-.25-.016-.391.109-.516.109-.109.25-.281.375-.422.125-.141.172-.25.25-.406.078-.172.047-.328-.016-.453-.062-.125-.578-1.391-.781-1.906-.203-.5-.406-.438-.578-.438h-.484c-.172 0-.453.062-.688.312-.234.25-.906.891-.906 2.172 0 1.281.938 2.516 1.062 2.688.141.172 1.844 2.812 4.469 3.953.625.266 1.109.438 1.5.562.641.203 1.219.172 1.688.109.516-.078 1.469-.609 1.688-1.203.203-.594.203-1.094.141-1.203-.063-.109-.234-.172-.484-.297z"/></svg>
+          <span>Chat WhatsApp</span>
+        </a>
+        <a class="btn btn--secondary btn--sm" id="drawer-call-btn" href="javascript:void(0)" style="flex: 1;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>Call Client</span>
+        </a>
+      </div>
+
+      <!-- Lead Status Selector -->
+      <div class="detail-section">
+        <div class="detail-section__title">Update Lead Stage</div>
+        <select class="form-select" id="drawer-status-select">
+          <option value="new">🔵 New (Needs Follow-up)</option>
+          <option value="contacted">🟡 Contacted (Awaiting Reply)</option>
+          <option value="in_discussion">🟣 In Discussion (Drawings / Budget)</option>
+          <option value="site_visit">🌐 Site Visit Scheduled</option>
+          <option value="converted">🟢 Converted / Won Project</option>
+          <option value="lost">🔴 Lost / Disqualified</option>
+        </select>
+      </div>
+
+      <!-- Contact & Property Info -->
+      <div class="detail-section">
+        <div class="detail-section__title">Contact &amp; Project Info</div>
+        <div class="detail-box">
+          <div class="detail-row">
+            <span class="detail-row__label">Phone</span>
+            <span class="detail-row__value" id="drawer-phone">—</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-row__label">Email</span>
+            <span class="detail-row__value" id="drawer-email">—</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-row__label">Service</span>
+            <span class="detail-row__value" id="drawer-service">—</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-row__label">Location / Area</span>
+            <span class="detail-row__value" id="drawer-location">—</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-row__label">Approx. Sq.ft</span>
+            <span class="detail-row__value" id="drawer-sqft">—</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-row__label">Budget / Quote</span>
+            <span class="detail-row__value" id="drawer-budget">—</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-row__label">Received On</span>
+            <span class="detail-row__value" id="drawer-created">—</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inquiry Message / Notes -->
+      <div class="detail-section" id="drawer-message-section">
+        <div class="detail-section__title">Customer Message / Note</div>
+        <div class="detail-box" style="font-size: 13px; white-space: pre-wrap;" id="drawer-message">—</div>
+      </div>
+
+      <!-- Calculator Details (if present) -->
+      <div class="detail-section" id="drawer-calc-section" style="display: none;">
+        <div class="detail-section__title">Calculator Breakdown</div>
+        <div class="detail-box" id="drawer-calc-content"></div>
+      </div>
+
+      <!-- Internal Team Follow-up Notes -->
+      <div class="detail-section">
+        <div class="detail-section__title">Team Follow-up Log</div>
+        <div id="drawer-notes-list"></div>
+
+        <form id="drawer-note-form" style="margin-top: 10px;">
+          <textarea class="form-textarea" id="drawer-note-input" placeholder="Add follow-up notes (e.g. Called customer, site visit scheduled on Sunday 11am)..." required style="min-height: 60px;"></textarea>
+          <button class="btn btn--secondary btn--sm" type="submit" style="margin-top: 6px; width: 100%;">
+            <span>+ Add Internal Note</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Delete Lead Button -->
+      <div style="margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end;">
+        <button class="btn btn--danger btn--sm" id="drawer-delete-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+          <span>Delete Lead</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==================== MANUAL ADD LEAD MODAL ==================== -->
+  <div class="modal-backdrop" id="add-modal">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3 class="modal-head__title">Add Walk-in or Phone Lead</h3>
+        <button class="modal-close-btn" id="add-modal-close">&times;</button>
+      </div>
+      <form id="add-lead-form">
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="add-name">Full Name *</label>
+              <input class="form-input" type="text" id="add-name" required placeholder="e.g. S. Vijayaraghavan">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="add-phone">Phone / WhatsApp *</label>
+              <input class="form-input" type="tel" id="add-phone" required placeholder="e.g. +91 98765 43210">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="add-email">Email Address</label>
+              <input class="form-input" type="email" id="add-email" placeholder="name@example.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="add-service">Service Requested</label>
+              <select class="form-select" id="add-service">
+                <option value="Residential House Construction">Residential House Construction</option>
+                <option value="Commercial Construction">Commercial Construction</option>
+                <option value="Interior Design">Interior Design</option>
+                <option value="Renovation and Remodeling">Renovation and Remodeling</option>
+                <option value="Architectural Planning & Approvals">Architectural Planning &amp; Approvals</option>
+                <option value="General Construction Consultation">General Consultation</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="add-location">Plot Location / Town</label>
+              <input class="form-input" type="text" id="add-location" placeholder="e.g. Thiruvallur, Avadi, Poonamallee">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="add-sqft">Approx. Area (Sq.ft)</label>
+              <input class="form-input" type="text" id="add-sqft" placeholder="e.g. 1800">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="add-notes">Initial Discussion Notes</label>
+            <textarea class="form-textarea" id="add-notes" placeholder="Notes from phone call or office visit..."></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn--secondary" type="button" id="add-modal-cancel">Cancel</button>
+          <button class="btn btn--primary" type="submit">
+            <span>Save Lead to Database</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <span id="toast-msg">Action completed</span>
+  </div>
+
+  <!-- ==================== CLIENT SCRIPT ==================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      var currentLeads = [];
+      var activeLead = null;
+      var activeStatus = 'all';
+      var activeService = 'all';
+      var activeSearch = '';
+
+      var dom = {
+        authOverlay: document.getElementById('auth-overlay'),
+        loginForm: document.getElementById('login-form'),
+        authError: document.getElementById('auth-error'),
+        dbIndicator: document.getElementById('db-indicator'),
+        dbStatusText: document.getElementById('db-status-text'),
+        statTotal: document.getElementById('stat-total'),
+        statNew: document.getElementById('stat-new'),
+        statActive: document.getElementById('stat-active'),
+        statConverted: document.getElementById('stat-converted'),
+        statPipeline: document.getElementById('stat-pipeline'),
+        leadsTbody: document.getElementById('leads-tbody'),
+        emptyState: document.getElementById('empty-state'),
+        filterSearch: document.getElementById('filter-search'),
+        filterService: document.getElementById('filter-service'),
+        statusTabs: document.getElementById('status-tabs'),
+        btnRefresh: document.getElementById('btn-refresh'),
+        btnExportCsv: document.getElementById('btn-export-csv'),
+        btnOpenAddLead: document.getElementById('btn-open-add-lead'),
+        btnLogout: document.getElementById('btn-logout'),
+        // Drawer
+        drawer: document.getElementById('lead-drawer'),
+        drawerBackdrop: document.getElementById('drawer-backdrop'),
+        drawerClose: document.getElementById('drawer-close'),
+        drawerName: document.getElementById('drawer-name'),
+        drawerSource: document.getElementById('drawer-source'),
+        drawerPhone: document.getElementById('drawer-phone'),
+        drawerEmail: document.getElementById('drawer-email'),
+        drawerService: document.getElementById('drawer-service'),
+        drawerLocation: document.getElementById('drawer-location'),
+        drawerSqft: document.getElementById('drawer-sqft'),
+        drawerBudget: document.getElementById('drawer-budget'),
+        drawerCreated: document.getElementById('drawer-created'),
+        drawerMessage: document.getElementById('drawer-message'),
+        drawerCalcSection: document.getElementById('drawer-calc-section'),
+        drawerCalcContent: document.getElementById('drawer-calc-content'),
+        drawerStatusSelect: document.getElementById('drawer-status-select'),
+        drawerNotesList: document.getElementById('drawer-notes-list'),
+        drawerNoteForm: document.getElementById('drawer-note-form'),
+        drawerNoteInput: document.getElementById('drawer-note-input'),
+        drawerWaBtn: document.getElementById('drawer-wa-btn'),
+        drawerCallBtn: document.getElementById('drawer-call-btn'),
+        drawerDeleteBtn: document.getElementById('drawer-delete-btn'),
+        // Modal Add Lead
+        addModal: document.getElementById('add-modal'),
+        addModalClose: document.getElementById('add-modal-close'),
+        addModalCancel: document.getElementById('add-modal-cancel'),
+        addLeadForm: document.getElementById('add-lead-form'),
+        // Toast
+        toast: document.getElementById('toast'),
+        toastMsg: document.getElementById('toast-msg')
+      };
+
+      function showToast(msg) {
+        dom.toastMsg.textContent = msg;
+        dom.toast.classList.add('is-visible');
+        setTimeout(function () {
+          dom.toast.classList.remove('is-visible');
+        }, 3200);
+      }
+
+      function formatINR(val) {
+        if (!val || isNaN(val)) return '₹0';
+        return '₹' + Number(val).toLocaleString('en-IN');
+      }
+
+      function formatDate(dateStr) {
+        if (!dateStr) return '—';
+        var d = new Date(dateStr);
+        if (isNaN(d.getTime())) return dateStr;
+        return d.toLocaleDateString('en-IN', {
+          day: '2-digit',
+          month: 'short',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+      }
+
+      function formatRelative(dateStr) {
+        if (!dateStr) return '';
+        var d = new Date(dateStr);
+        var diff = Math.floor((Date.now() - d.getTime()) / 1000);
+        if (diff < 60) return 'Just now';
+        if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+        if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+        if (diff < 604800) return Math.floor(diff / 86400) + 'd ago';
+        return d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short' });
+      }
+
+      function getStatusBadge(status) {
+        var map = {
+          new: { label: 'New', cls: 'badge--new' },
+          contacted: { label: 'Contacted', cls: 'badge--contacted' },
+          in_discussion: { label: 'In Discussion', cls: 'badge--in_discussion' },
+          site_visit: { label: 'Site Visit', cls: 'badge--site_visit' },
+          converted: { label: 'Converted', cls: 'badge--converted' },
+          lost: { label: 'Lost', cls: 'badge--lost' }
+        };
+        var s = map[status] || { label: status, cls: 'badge--new' };
+        return '<span class="badge ' + s.cls + '">' + s.label + '</span>';
+      }
+
+      // Check DB Health
+      function checkHealth() {
+        fetch('/api/health')
+          .then(function (res) { return res.json(); })
+          .then(function (data) {
+            if (data.database === 'connected') {
+              dom.dbIndicator.style.background = '#10b981';
+              dom.dbStatusText.textContent = 'MongoDB Connected';
+            } else {
+              dom.dbIndicator.style.background = '#f59e0b';
+              dom.dbStatusText.textContent = 'Connecting DB...';
+            }
+          })
+          .catch(function () {
+            dom.dbIndicator.style.background = '#ef4444';
+            dom.dbStatusText.textContent = 'DB Offline';
+          });
+      }
+
+      // Auth check
+      function checkAuth() {
+        fetch('/api/auth/check')
+          .then(function (res) {
+            if (res.ok) {
+              dom.authOverlay.style.display = 'none';
+              loadDashboard();
+            } else {
+              dom.authOverlay.style.display = 'flex';
+            }
+          })
+          .catch(function () {
+            dom.authOverlay.style.display = 'flex';
+          });
+      }
+
+      // Login submission
+      dom.loginForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        dom.authError.style.display = 'none';
+        var username = dom.loginForm.username.value;
+        var password = dom.loginForm.password.value;
+
+        fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: username, password: password })
+        })
+          .then(function (res) { return res.json(); })
+          .then(function (data) {
+            if (data.success) {
+              dom.authOverlay.style.display = 'none';
+              showToast('Signed in successfully');
+              loadDashboard();
+            } else {
+              dom.authError.textContent = data.error || 'Invalid credentials';
+              dom.authError.style.display = 'block';
+            }
+          })
+          .catch(function (err) {
+            dom.authError.textContent = 'Connection error. Please try again.';
+            dom.authError.style.display = 'block';
+          });
+      });
+
+      // Logout
+      dom.btnLogout.addEventListener('click', function () {
+        fetch('/api/auth/logout', { method: 'POST' })
+          .then(function () {
+            window.location.reload();
+          });
+      });
+
+      // Load stats and leads
+      function loadDashboard() {
+        checkHealth();
+        loadStats();
+        loadLeads();
+      }
+
+      function loadStats() {
+        fetch('/api/leads/stats')
+          .then(function (res) { return res.json(); })
+          .then(function (res) {
+            if (res.success && res.stats) {
+              var s = res.stats;
+              dom.statTotal.textContent = s.total;
+              dom.statNew.textContent = s.new;
+              dom.statActive.textContent = (s.inDiscussion || 0) + (s.siteVisit || 0);
+              dom.statConverted.textContent = s.converted;
+              dom.statPipeline.textContent = formatINR(s.pipelineSum);
+            }
+          })
+          .catch(function (err) { console.error('Failed to load stats', err); });
+      }
+
+      function loadLeads() {
+        var query = [];
+        if (activeStatus !== 'all') query.push('status=' + encodeURIComponent(activeStatus));
+        if (activeService !== 'all') query.push('service=' + encodeURIComponent(activeService));
+        if (activeSearch.trim()) query.push('search=' + encodeURIComponent(activeSearch.trim()));
+
+        var url = '/api/leads?' + query.join('&');
+        fetch(url)
+          .then(function (res) { return res.json(); })
+          .then(function (res) {
+            if (res.success) {
+              currentLeads = res.leads || [];
+              renderLeadsTable(currentLeads);
+            }
+          })
+          .catch(function (err) {
+            console.error('Failed to fetch leads', err);
+          });
+      }
+
+      function renderLeadsTable(leads) {
+        dom.leadsTbody.innerHTML = '';
+        if (!leads.length) {
+          dom.emptyState.style.display = 'block';
+          return;
+        }
+        dom.emptyState.style.display = 'none';
+
+        leads.forEach(function (lead) {
+          var tr = document.createElement('tr');
+
+          // Clean phone for wa.me
+          var rawPhone = (lead.phone || '').replace(/[^0-9]/g, '');
+          if (rawPhone.length === 10) rawPhone = '91' + rawPhone;
+          var waLink = 'https://wa.me/' + rawPhone + '?text=' + encodeURIComponent('Hi ' + (lead.name || '') + ', thanking you for contacting Garuda Construction regarding your ' + (lead.service || 'project') + '.');
+
+          tr.innerHTML =
+            '<td>' +
+              '<div class="lead-name">' +
+                '<span>' + escapeHtml(lead.name || 'Anonymous') + '</span>' +
+              '</div>' +
+              '<div class="lead-contact">' +
+                '<span>' + escapeHtml(lead.phone || 'No phone') + '</span>' +
+                (rawPhone ? '<a class="lead-action-pill lead-action-pill--wa" href="' + waLink + '" target="_blank" rel="noopener">WhatsApp &rarr;</a>' : '') +
+              '</div>' +
+            '</td>' +
+            '<td>' +
+              '<span class="lead-tag">' + escapeHtml(lead.service || 'General Enquiry') + '</span>' +
+              (lead.budget ? '<div style="font-size:11px; color:var(--text-muted); margin-top:3px;">Budget: ' + escapeHtml(lead.budget) + '</div>' : '') +
+            '</td>' +
+            '<td>' +
+              '<div>' + escapeHtml(lead.location || 'Thiruvallur / Chennai') + '</div>' +
+              (lead.sqft ? '<div style="font-size:11px; color:var(--text-muted);">' + escapeHtml(lead.sqft) + ' sq.ft</div>' : '') +
+            '</td>' +
+            '<td>' +
+              '<select class="status-select-inline js-status-change" data-id="' + escapeHtml(lead._id) + '">' +
+                '<option value="new"' + (lead.status === 'new' ? ' selected' : '') + '>🔵 New</option>' +
+                '<option value="contacted"' + (lead.status === 'contacted' ? ' selected' : '') + '>🟡 Contacted</option>' +
+                '<option value="in_discussion"' + (lead.status === 'in_discussion' ? ' selected' : '') + '>🟣 In Discussion</option>' +
+                '<option value="site_visit"' + (lead.status === 'site_visit' ? ' selected' : '') + '>🌐 Site Visit</option>' +
+                '<option value="converted"' + (lead.status === 'converted' ? ' selected' : '') + '>🟢 Converted</option>' +
+                '<option value="lost"' + (lead.status === 'lost' ? ' selected' : '') + '>🔴 Lost</option>' +
+              '</select>' +
+            '</td>' +
+            '<td>' +
+              '<span class="lead-tag">' + escapeHtml(lead.source || 'Website') + '</span>' +
+              '<div class="lead-time" title="' + escapeHtml(formatDate(lead.createdAt)) + '">' + escapeHtml(formatRelative(lead.createdAt)) + '</div>' +
+            '</td>' +
+            '<td style="text-align: right;">' +
+              '<button class="btn btn--secondary btn--sm js-view-lead" data-id="' + escapeHtml(lead._id) + '">View Details</button>' +
+            '</td>';
+
+          dom.leadsTbody.appendChild(tr);
+        });
+
+        // Attach event listeners to table items
+        dom.leadsTbody.querySelectorAll('.js-status-change').forEach(function (select) {
+          select.addEventListener('change', function () {
+            var id = this.getAttribute('data-id');
+            var newStatus = this.value;
+            updateLeadStatus(id, newStatus);
+          });
+        });
+
+        dom.leadsTbody.querySelectorAll('.js-view-lead').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var id = this.getAttribute('data-id');
+            openLeadDrawer(id);
+          });
+        });
+      }
+
+      function escapeHtml(str) {
+        if (!str) return '';
+        return String(str).replace(/[&<>"']/g, function (m) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+        });
+      }
+
+      // Quick inline status change
+      function updateLeadStatus(id, status) {
+        fetch('/api/leads/' + id, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: status })
+        })
+          .then(function (res) { return res.json(); })
+          .then(function (res) {
+            if (res.success) {
+              showToast('Lead status updated');
+              loadStats();
+            }
+          });
+      }
+
+      // Open detail drawer
+      function openLeadDrawer(id) {
+        var lead = currentLeads.find(function (l) { return l._id === id; });
+        if (!lead) return;
+        activeLead = lead;
+
+        dom.drawerName.textContent = lead.name || 'Anonymous Visitor';
+        dom.drawerSource.textContent = 'Source: ' + (lead.source || 'Website');
+        dom.drawerPhone.textContent = lead.phone || '—';
+        dom.drawerEmail.textContent = lead.email || '—';
+        dom.drawerService.textContent = lead.service || '—';
+        dom.drawerLocation.textContent = lead.location || '—';
+        dom.drawerSqft.textContent = lead.sqft ? (lead.sqft + ' sq.ft') : '—';
+        dom.drawerBudget.textContent = lead.budget || (lead.details?.grandTotal ? formatINR(lead.details.grandTotal) : '—');
+        dom.drawerCreated.textContent = formatDate(lead.createdAt);
+        dom.drawerMessage.textContent = lead.message || '(No extra message provided)';
+        dom.drawerStatusSelect.value = lead.status || 'new';
+
+        // Action links
+        var rawPhone = (lead.phone || '').replace(/[^0-9]/g, '');
+        if (rawPhone.length === 10) rawPhone = '91' + rawPhone;
+        dom.drawerWaBtn.href = rawPhone ? ('https://wa.me/' + rawPhone + '?text=' + encodeURIComponent('Hi ' + (lead.name || '') + ', following up from Garuda Construction regarding your construction enquiry.')) : '#';
+        dom.drawerCallBtn.href = lead.phone ? ('tel:' + lead.phone) : '#';
+
+        // Calculator details
+        if (lead.details && (lead.details.propertyType || lead.details.pkgLabel || lead.details.grandTotal)) {
+          var d = lead.details;
+          dom.drawerCalcSection.style.display = 'block';
+          dom.drawerCalcContent.innerHTML =
+            '<div class="detail-row"><span class="detail-row__label">Property Type</span><span class="detail-row__value">' + escapeHtml(d.propertyType || d.propertyLabel || '—') + '</span></div>' +
+            '<div class="detail-row"><span class="detail-row__label">Package Tier</span><span class="detail-row__value">' + escapeHtml(d.pkgLabel || '—') + '</span></div>' +
+            '<div class="detail-row"><span class="detail-row__label">Floors</span><span class="detail-row__value">' + escapeHtml(d.floorsLabel || '—') + '</span></div>' +
+            '<div class="detail-row"><span class="detail-row__label">Timeline</span><span class="detail-row__value">' + escapeHtml(d.timeline || '—') + '</span></div>' +
+            '<div class="detail-row"><span class="detail-row__label">Estimated Quote</span><span class="detail-row__value" style="color:var(--accent-green); font-weight:700;">' + formatINR(d.grandTotal) + '</span></div>';
+        } else {
+          dom.drawerCalcSection.style.display = 'none';
+        }
+
+        // Render notes
+        renderNotes(lead.notes || []);
+
+        dom.drawer.classList.add('is-open');
+        dom.drawerBackdrop.classList.add('is-open');
+      }
+
+      function closeLeadDrawer() {
+        dom.drawer.classList.remove('is-open');
+        dom.drawerBackdrop.classList.remove('is-open');
+        activeLead = null;
+      }
+
+      dom.drawerClose.addEventListener('click', closeLeadDrawer);
+      dom.drawerBackdrop.addEventListener('click', closeLeadDrawer);
+
+      // Drawer status change
+      dom.drawerStatusSelect.addEventListener('change', function () {
+        if (!activeLead) return;
+        var status = this.value;
+        updateLeadStatus(activeLead._id, status);
+        activeLead.status = status;
+        loadLeads();
+      });
+
+      // Render notes
+      function renderNotes(notes) {
+        dom.drawerNotesList.innerHTML = '';
+        if (!notes || !notes.length) {
+          dom.drawerNotesList.innerHTML = '<div style="font-size:12px; color:var(--text-muted); font-style:italic;">No follow-up notes recorded yet.</div>';
+          return;
+        }
+        notes.slice().reverse().forEach(function (n) {
+          var el = document.createElement('div');
+          el.className = 'note-item';
+          el.innerHTML =
+            '<div>' + escapeHtml(n.text) + '</div>' +
+            '<div class="note-meta">' +
+              '<span>By ' + escapeHtml(n.author || 'Admin') + '</span>' +
+              '<span>' + escapeHtml(formatDate(n.createdAt)) + '</span>' +
+            '</div>';
+          dom.drawerNotesList.appendChild(el);
+        });
+      }
+
+      // Add Note in drawer
+      dom.drawerNoteForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!activeLead) return;
+        var note = dom.drawerNoteInput.value.trim();
+        if (!note) return;
+
+        fetch('/api/leads/' + activeLead._id, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ newNote: note })
+        })
+          .then(function (res) { return res.json(); })
+          .then(function (res) {
+            if (res.success && res.lead) {
+              activeLead = res.lead;
+              renderNotes(activeLead.notes || []);
+              dom.drawerNoteInput.value = '';
+              showToast('Note added successfully');
+            }
+          });
+      });
+
+      // Delete Lead
+      dom.drawerDeleteBtn.addEventListener('click', function () {
+        if (!activeLead) return;
+        if (!confirm('Are you sure you want to delete lead for "' + (activeLead.name || 'this client') + '"?')) return;
+
+        fetch('/api/leads/' + activeLead._id, { method: 'DELETE' })
+          .then(function (res) { return res.json(); })
+          .then(function (res) {
+            if (res.success) {
+              showToast('Lead deleted');
+              closeLeadDrawer();
+              loadDashboard();
+            }
+          });
+      });
+
+      // --- Status Tabs Filtering ---
+      dom.statusTabs.querySelectorAll('.status-tab').forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          dom.statusTabs.querySelectorAll('.status-tab').forEach(function (t) { t.classList.remove('active'); });
+          this.classList.add('active');
+          activeStatus = this.getAttribute('data-status');
+          loadLeads();
+        });
+      });
+
+      // --- Service Filter ---
+      dom.filterService.addEventListener('change', function () {
+        activeService = this.value;
+        loadLeads();
+      });
+
+      // --- Live Search ---
+      var searchTimeout = null;
+      dom.filterSearch.addEventListener('input', function () {
+        clearTimeout(searchTimeout);
+        var val = this.value;
+        searchTimeout = setTimeout(function () {
+          activeSearch = val;
+          loadLeads();
+        }, 250);
+      });
+
+      // --- Refresh Button ---
+      dom.btnRefresh.addEventListener('click', function () {
+        showToast('Refreshing leads...');
+        loadDashboard();
+      });
+
+      // --- Export CSV ---
+      dom.btnExportCsv.addEventListener('click', function () {
+        window.location.href = '/api/leads/export';
+      });
+
+      // --- Manual Add Lead Modal ---
+      function openAddModal() {
+        dom.addModal.classList.add('is-open');
+      }
+      function closeAddModal() {
+        dom.addModal.classList.remove('is-open');
+        dom.addLeadForm.reset();
+      }
+
+      dom.btnOpenAddLead.addEventListener('click', openAddModal);
+      dom.addModalClose.addEventListener('click', closeAddModal);
+      dom.addModalCancel.addEventListener('click', closeAddModal);
+
+      dom.addLeadForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var payload = {
+          name: document.getElementById('add-name').value,
+          phone: document.getElementById('add-phone').value,
+          email: document.getElementById('add-email').value,
+          service: document.getElementById('add-service').value,
+          location: document.getElementById('add-location').value,
+          sqft: document.getElementById('add-sqft').value,
+          notes: document.getElementById('add-notes').value
+        };
+
+        fetch('/api/leads/manual', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        })
+          .then(function (res) { return res.json(); })
+          .then(function (res) {
+            if (res.success) {
+              showToast('Lead added successfully');
+              closeAddModal();
+              loadDashboard();
+            } else {
+              alert(res.error || 'Failed to save lead');
+            }
+          })
+          .catch(function () {
+            alert('Server error saving lead');
+          });
+      });
+
+      // Init on load
+      checkAuth();
+    })();
+  </script>
+</body>
+</html>

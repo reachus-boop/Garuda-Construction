@@ -1,0 +1,133 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/index",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/pricing",
+      "destination": "/packages",
+      "permanent": true
+    },
+    {
+      "source": "/construction-company-in-avadi",
+      "destination": "/house-construction-in-avadi",
+      "permanent": true
+    },
+    {
+      "source": "/home-construction-in-avadi",
+      "destination": "/house-construction-in-avadi",
+      "permanent": true
+    },
+    {
+      "source": "/construction-company-in-ambattur",
+      "destination": "/building-contractors-in-ambattur",
+      "permanent": true
+    },
+    {
+      "source": "/home-construction-in-ambattur",
+      "destination": "/building-contractors-in-ambattur",
+      "permanent": true
+    },
+    {
+      "source": "/construction-company-in-poonamallee",
+      "destination": "/house-construction-in-poonamallee",
+      "permanent": true
+    },
+    {
+      "source": "/home-construction-in-poonamallee",
+      "destination": "/house-construction-in-poonamallee",
+      "permanent": true
+    },
+    {
+      "source": "/construction-company-in-vanagaram",
+      "destination": "/building-contractors-in-vanagaram",
+      "permanent": true
+    },
+    {
+      "source": "/home-construction-in-vanagaram",
+      "destination": "/building-contractors-in-vanagaram",
+      "permanent": true
+    },
+    {
+      "source": "/construction-company-in-kelambakkam",
+      "destination": "/house-construction-in-kelambakkam",
+      "permanent": true
+    },
+    {
+      "source": "/home-construction-in-kelambakkam",
+      "destination": "/house-construction-in-kelambakkam",
+      "permanent": true
+    },
+    {
+      "source": "/construction-company-in-omr",
+      "destination": "/house-construction-in-omr-chennai",
+      "permanent": true
+    },
+    {
+      "source": "/home-construction-in-omr",
+      "destination": "/house-construction-in-omr-chennai",
+      "permanent": true
+    },
+    {
+      "source": "/construction-cost-in-chennai",
+      "destination": "/house-construction-cost-chennai",
+      "permanent": true
+    },
+    {
+      "source": "/cmda-approval-rules-chennai",
+      "destination": "/cmda-dtcp-approval-rules-chennai",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/admin/(.*)",
+      "destination": "/admin"
+    }
+  ]
+}

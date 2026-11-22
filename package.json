@@ -1,0 +1,20 @@
+{
+  "name": "garuda-constructions",
+  "version": "1.0.0",
+  "description": "Garuda Construction website",
+  "scripts": {
+    "start": "node server.js",
+    "build": "echo 'Static build ready'"
+  },
+  "keywords": [
+    "construction",
+    "architecture",
+    "website"
+  ],
+  "author": "Garuda Construction",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^18.0.8",
+    "mongodb": "^7.7.0"
+  }
+}
