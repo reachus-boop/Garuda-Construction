@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
   <!-- 1. Homepage -->
   <url>
     <loc>https://www.garuda-construction.com/</loc>
-    <lastmod>2026-11-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/" />
+    <lastmod>2026-11-25</lastmod>
   </url>
 
   <!-- 2. Services Overview -->
   <url>
     <loc>https://www.garuda-construction.com/services</loc>
-    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/services" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta/services" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/services" />
+    <lastmod>2026-11-25</lastmod>
   </url>
 
   <!-- 3. Residential Construction -->
@@ -31,13 +38,19 @@
   <!-- 5. Construction Packages & Pricing -->
   <url>
     <loc>https://www.garuda-construction.com/packages</loc>
-    <lastmod>2026-11-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/packages" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta/packages" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/packages" />
+    <lastmod>2026-11-25</lastmod>
   </url>
 
   <!-- 6. Cost Calculator -->
   <url>
     <loc>https://www.garuda-construction.com/calculator</loc>
-    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/calculator" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta/calculator" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/calculator" />
+    <lastmod>2026-11-25</lastmod>
   </url>
 
   <!-- 7. Interior Design -->
@@ -61,25 +74,37 @@
   <!-- 10. Completed Projects Portfolio -->
   <url>
     <loc>https://www.garuda-construction.com/projects</loc>
-    <lastmod>2026-11-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/projects" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta/projects" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/projects" />
+    <lastmod>2026-11-25</lastmod>
   </url>
 
   <!-- 11. Contact Page -->
   <url>
     <loc>https://www.garuda-construction.com/contact</loc>
-    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/contact" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/contact" />
+    <lastmod>2026-11-25</lastmod>
   </url>
 
   <!-- 12. FAQ -->
   <url>
     <loc>https://www.garuda-construction.com/faq</loc>
-    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/faq" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/faq" />
+    <lastmod>2026-11-25</lastmod>
   </url>
 
   <!-- 13. Blog -->
   <url>
     <loc>https://www.garuda-construction.com/blog</loc>
-    <lastmod>2026-11-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/blog" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta/blog" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/blog" />
+    <lastmod>2026-11-25</lastmod>
   </url>
 
   <!-- 14. Blog Article: Building Contractors in Thiruvallur & Chennai -->
@@ -97,19 +122,28 @@
   <!-- 16. Construction Company & House Construction in Avadi -->
   <url>
     <loc>https://www.garuda-construction.com/house-construction-in-avadi</loc>
-    <lastmod>2026-11-01</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/house-construction-in-avadi" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta/house-construction-in-avadi" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/house-construction-in-avadi" />
+    <lastmod>2026-11-25</lastmod>
   </url>
 
   <!-- 17. Construction Company & House Construction in Poonamallee -->
   <url>
     <loc>https://www.garuda-construction.com/house-construction-in-poonamallee</loc>
-    <lastmod>2026-11-01</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/house-construction-in-poonamallee" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta/house-construction-in-poonamallee" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/house-construction-in-poonamallee" />
+    <lastmod>2026-11-25</lastmod>
   </url>
 
   <!-- 18. Construction Company & Building Contractors in Ambattur -->
   <url>
     <loc>https://www.garuda-construction.com/building-contractors-in-ambattur</loc>
-    <lastmod>2026-11-01</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/building-contractors-in-ambattur" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta/building-contractors-in-ambattur" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/building-contractors-in-ambattur" />
+    <lastmod>2026-11-25</lastmod>
   </url>
 
   <!-- 19. Construction Company & Building Contractors in Vanagaram -->
@@ -139,7 +173,10 @@
   <!-- Guide: House Construction Cost Chennai 2026 -->
   <url>
     <loc>https://www.garuda-construction.com/house-construction-cost-chennai</loc>
-    <lastmod>2026-11-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/house-construction-cost-chennai" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta/house-construction-cost-chennai" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/house-construction-cost-chennai" />
+    <lastmod>2026-11-25</lastmod>
   </url>
 
   <!-- Guide: CMDA vs DTCP Approval Rules Chennai 2026 -->
@@ -166,7 +203,10 @@
 
   <url>
     <loc>https://www.garuda-construction.com/house-construction-cost-thiruvallur</loc>
-    <lastmod>2026-11-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/house-construction-cost-thiruvallur" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta/house-construction-cost-thiruvallur" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/house-construction-cost-thiruvallur" />
+    <lastmod>2026-11-25</lastmod>
   </url>
 
   <url>
@@ -191,6 +231,126 @@
   <url>
     <loc>https://www.garuda-construction.com/renovation-quotation-checklist-thiruvallur</loc>
     <lastmod>2026-11-17</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.garuda-construction.com/ta</loc>
+    <lastmod>2026-11-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/" />
+  </url>
+
+  <url>
+    <loc>https://www.garuda-construction.com/ta/services</loc>
+    <lastmod>2026-11-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/services" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta/services" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/services" />
+  </url>
+
+  <url>
+    <loc>https://www.garuda-construction.com/ta/packages</loc>
+    <lastmod>2026-11-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/packages" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta/packages" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/packages" />
+  </url>
+
+  <url>
+    <loc>https://www.garuda-construction.com/ta/calculator</loc>
+    <lastmod>2026-11-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/calculator" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta/calculator" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/calculator" />
+  </url>
+
+  <url>
+    <loc>https://www.garuda-construction.com/ta/projects</loc>
+    <lastmod>2026-11-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/projects" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta/projects" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/projects" />
+  </url>
+
+  <url>
+    <loc>https://www.garuda-construction.com/ta/contact</loc>
+    <lastmod>2026-11-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/contact" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/contact" />
+  </url>
+
+  <url>
+    <loc>https://www.garuda-construction.com/ta/blog</loc>
+    <lastmod>2026-11-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/blog" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta/blog" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/blog" />
+  </url>
+
+  <url>
+    <loc>https://www.garuda-construction.com/ta/faq</loc>
+    <lastmod>2026-11-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/faq" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/faq" />
+  </url>
+
+  <url>
+    <loc>https://www.garuda-construction.com/ta/house-construction-cost-chennai</loc>
+    <lastmod>2026-11-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/house-construction-cost-chennai" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta/house-construction-cost-chennai" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/house-construction-cost-chennai" />
+  </url>
+
+  <url>
+    <loc>https://www.garuda-construction.com/ta/house-construction-cost-thiruvallur</loc>
+    <lastmod>2026-11-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/house-construction-cost-thiruvallur" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta/house-construction-cost-thiruvallur" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/house-construction-cost-thiruvallur" />
+  </url>
+
+  <url>
+    <loc>https://www.garuda-construction.com/ta/building-contractors-in-ambattur</loc>
+    <lastmod>2026-11-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/building-contractors-in-ambattur" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta/building-contractors-in-ambattur" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/building-contractors-in-ambattur" />
+  </url>
+
+  <url>
+    <loc>https://www.garuda-construction.com/ta/house-construction-in-avadi</loc>
+    <lastmod>2026-11-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/house-construction-in-avadi" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta/house-construction-in-avadi" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/house-construction-in-avadi" />
+  </url>
+
+  <url>
+    <loc>https://www.garuda-construction.com/ta/house-construction-in-poonamallee</loc>
+    <lastmod>2026-11-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/house-construction-in-poonamallee" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta/house-construction-in-poonamallee" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/house-construction-in-poonamallee" />
+  </url>
+
+  <url>
+    <loc>https://www.garuda-construction.com/1000-sq-ft-house-construction-cost-chennai</loc>
+    <lastmod>2026-11-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/1000-sq-ft-house-construction-cost-chennai" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta/1000-sq-ft-house-construction-cost-chennai" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/1000-sq-ft-house-construction-cost-chennai" />
+  </url>
+
+  <url>
+    <loc>https://www.garuda-construction.com/ta/1000-sq-ft-house-construction-cost-chennai</loc>
+    <lastmod>2026-11-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.garuda-construction.com/1000-sq-ft-house-construction-cost-chennai" />
+    <xhtml:link rel="alternate" hreflang="ta-IN" href="https://www.garuda-construction.com/ta/1000-sq-ft-house-construction-cost-chennai" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.garuda-construction.com/1000-sq-ft-house-construction-cost-chennai" />
   </url>
 
 </urlset>

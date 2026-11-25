@@ -343,3 +343,10 @@ body { padding: 0; background: var(--ivory); }
   .hero__copy-actions .btn { padding-inline: 7px; }
   .calc-breakdown-grid { grid-template-columns: 1fr; }
 }
+
+/* English / Tamil language links */
+.header__right .language-switch{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:0 12px;border:1px solid var(--line);border-radius:999px;color:var(--ink);font-size:12px;font-weight:800;text-decoration:none;white-space:nowrap}
+.header__right .language-switch:hover,.header__right .language-switch:focus-visible{background:var(--surface);border-color:var(--accent);color:var(--accent)}
+.blog-card__language-links{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.blog-card__language{display:inline-flex;align-items:center;min-height:42px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;color:var(--ink);font-size:12px;font-weight:700;text-decoration:none}
+.blog-card__language:hover,.blog-card__language:focus-visible{border-color:var(--accent);color:var(--accent)}
